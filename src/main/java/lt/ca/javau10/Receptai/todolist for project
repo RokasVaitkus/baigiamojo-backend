@@ -1,0 +1,30 @@
+clean project up so there are no field injections
+clean up endpoints
+
+
+maybe add a username and a show name 
+
+
+
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() =>{
+    fetch("http://localhost:8080/api/recipe/allRecipes")
+    .then((response) =>{
+      console.log(response);
+      return response.json();
+    }
+  )
+    .then((data)=>setRecipes(data) );
+  } , []);
+
+  const addRecipe=(recipe)=>{
+    fetch("http://localhost:8080/api/recipe/create",{
+      method: "POST",
+      headers:{"Content-Type": "application/json"},
+      body: JSON.stringify( recipe)
+    } )
+    .then((response) =>response.json())
+    .then((newRecipe)=>setRecipes([...recipes, newRecipe]));
+    
+  };

@@ -1,7 +1,7 @@
 package lt.ca.javau10.Receptai.entities;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
+
 
 
 @Embeddable

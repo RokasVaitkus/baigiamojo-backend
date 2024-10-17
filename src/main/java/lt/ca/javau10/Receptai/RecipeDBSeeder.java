@@ -11,11 +11,11 @@ import lt.ca.javau10.Receptai.entities.Recipe;
 import lt.ca.javau10.Receptai.repositories.RecipeRepository;
 
 @Component
-public class DataLoader implements CommandLineRunner {
+public class RecipeDBSeeder implements CommandLineRunner {
 
 	private RecipeRepository recipeRepository;
 
-	DataLoader(RecipeRepository recipeRepository) {
+	RecipeDBSeeder(RecipeRepository recipeRepository) {
 		this.recipeRepository = recipeRepository;
 	}
 

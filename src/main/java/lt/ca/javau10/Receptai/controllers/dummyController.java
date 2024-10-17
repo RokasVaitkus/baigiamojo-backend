@@ -1,6 +1,7 @@
 package lt.ca.javau10.Receptai.controllers;
 
 
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,20 +10,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lt.ca.javau10.Receptai.entities.Ingredients;
 import lt.ca.javau10.Receptai.entities.Recipe;
-//import lt.ca.javau10.Receptai.entities.User;
+import lt.ca.javau10.Receptai.entities.UserDto;
+
+
 
 @RestController
-@RequestMapping("/api")
-public class ApiController {
+@RequestMapping("/api/jsondummy")
+public class dummyController {
 
 	List<Ingredients> labas;
 	
-	@GetMapping("/jsondummy/recipe")
+	@GetMapping("/recipe")
 	public Recipe getSimpleRecipe() {
 		return new Recipe( "Simple name", "Simple Description", 0,0,labas, "How to make tutorial");
 	}
-//	@GetMapping("/jsondummy/user")
-//	public User getSimpleUser() {
-//		return new User("userName", "email", true, "password");
-//	}
+	
+    @GetMapping("/signup")
+    public UserDto getSimpleUser() {
+        return new UserDto("dummyUser", "dummy@example.com", "password123", new HashSet<>());
+    }
+
 }

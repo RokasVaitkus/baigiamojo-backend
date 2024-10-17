@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lt.ca.javau10.Receptai.entities.Recipe;
@@ -17,7 +18,8 @@ import lt.ca.javau10.Receptai.services.RecipeService;
 
 
 @RestController
-@CrossOrigin 
+@CrossOrigin
+@RequestMapping("/api/recipe")
 public class RecipeController {
 
 	private RecipeService recipeService;
@@ -25,23 +27,23 @@ public class RecipeController {
 			this.recipeService=recipeService;
 	}
 	
-	@GetMapping("/recipes")
+	@GetMapping("/allRecipes")
     	public List<Recipe> getAllRecipes() {
 			return recipeService.getAllRecipes();
     }
-	@GetMapping("/recipe/{id}")
+	@GetMapping("/recipeById/{id}")
 		public Recipe getRecipeByID(@PathVariable Long id) {
 			return recipeService.getRecipeById(id);
 	}
 	
-//	@GetMapping("recipes/{name}")
+//	@GetMapping("recipesByName/{name}")
 //		public List<Recipe> getAllRecipeByName(@PathVariable String name) {
 //			return recipeService.getAllByName(name);
 //	}
-	@GetMapping("recipe/{name}")
-	public Recipe getOneRecipeByName(@PathVariable String name) {
-		return recipeService.getOneByName(name);
-	}
+//	@GetMapping("recipeByName/{name}")
+//	public Recipe getOneRecipeByName(@PathVariable String name) {
+//		return recipeService.getOneByName(name);
+//	}
 	
 
     @PostMapping("/create")
@@ -49,12 +51,12 @@ public class RecipeController {
         return recipeService.saveRecipe(recipe);
     }
     
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteById/{id}")
     public void deleteRecipe(@PathVariable Long id) {
     	recipeService.deleteRecipeById(id);
     	
     }
-    @PatchMapping("/edit/{id}")
+    @PatchMapping("/editById/{id}")
     public Recipe editRecipe(@PathVariable Long id, @RequestBody Recipe recipeUpdates) {
     	return recipeService.partialUpdateRecipe(id, recipeUpdates);
     }
