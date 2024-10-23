@@ -21,7 +21,7 @@ public class RoleDBSeeder implements CommandLineRunner{
 	    RoleDBSeeder(RoleRepository roleRepository){
 	    	this.roleRepository=roleRepository;
 	    }
-
+//jei nėra ROLE_ADMIN arba ROLE_USER jas prideda į duomenų bazę
 	    @Override
 	    public void run(String... args) throws Exception {
 	        if (roleRepository.findByName(ERole.ROLE_ADMIN).isEmpty()) {

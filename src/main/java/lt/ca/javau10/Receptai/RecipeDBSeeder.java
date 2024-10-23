@@ -18,7 +18,7 @@ public class RecipeDBSeeder implements CommandLineRunner {
 	RecipeDBSeeder(RecipeRepository recipeRepository) {
 		this.recipeRepository = recipeRepository;
 	}
-
+//jei dombaze tuščia ja užpildyti
 	@Override
 	public void run(String... args) throws Exception {
 		if (recipeRepository.count() == 0) {

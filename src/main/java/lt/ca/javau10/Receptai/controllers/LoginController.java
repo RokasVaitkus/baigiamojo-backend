@@ -28,13 +28,15 @@ public class LoginController {
 	
 	public LoginController(AuthService authService) {
 		this.authService = authService;
-	}	
+	}
+	
+	//sis endpointas naudojamas prisijungimui
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser (@RequestBody LoginRequest loginRequest){
         JwtResponse jwtResponse = authService.authenticateUser(loginRequest);
         return ResponseEntity.ok(jwtResponse);		
 	}
-	
+	//šis endpointas vartotojo susukurimui
 	@PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
 		logger.info("Trying to signup \n" + signUpRequest);

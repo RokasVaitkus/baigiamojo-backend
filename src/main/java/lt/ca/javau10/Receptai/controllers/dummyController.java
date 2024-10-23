@@ -20,12 +20,12 @@ import lt.ca.javau10.Receptai.entities.UserDto;
 public class dummyController {
 
 	List<Ingredients> labas;
-	
+	//gražina tuscia receptą
 	@GetMapping("/recipe")
 	public Recipe getSimpleRecipe() {
 		return new Recipe( "Simple name", "Simple Description", 0,0,labas, "How to make tutorial");
 	}
-	
+	//grazina tuscia useri
     @GetMapping("/signup")
     public UserDto getSimpleUser() {
         return new UserDto("dummyUser", "dummy@example.com", "password123", new HashSet<>());

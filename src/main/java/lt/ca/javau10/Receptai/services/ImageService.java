@@ -20,7 +20,7 @@ public class ImageService {
 	public ImageService(ImageRepository imageRepository) {
 		this.imageRepository=imageRepository;
 	}
-	
+	//ikelia nuotrauka i duomenu bazę
 	public Long storeFile(MultipartFile file) throws IOException {
 	    RecipeImage files = RecipeImage.builder()
 	        .name(file.getOriginalFilename())
@@ -28,24 +28,24 @@ public class ImageService {
 	        .imageData(file.getBytes())
 	        .build();
 	    
-	    // Save the file to the repository
+	
 	    files = imageRepository.save(files);
 	    
-	    // Return the ID of the saved image
-	    return files.getId(); // Return the ID
-	}
 
+	    return files.getId(); 
+	}
+//randa nuotrauka su id 
 	public byte[] getImageById(Long id) {
 		RecipeImage image= imageRepository.findById(id).orElse(new RecipeImage());
 		
 		return image.getImageData();
 	}
-	
+	//istrina nuotrauka su id
     public void deleteImageById(Long id) {
 		imageRepository.deleteById(id);
 		
 	}
-    
+    // partial nuotraukos atnaujinimas kur gali pakeisti tik viena ar kelis entitcio dalis ir kitos ateis is seno 
 	public RecipeImage partialUpdateImage(Long id, RecipeImage imageUpdates) {
 		RecipeImage oldImage = imageRepository.findById(id)
 	            .orElseThrow();

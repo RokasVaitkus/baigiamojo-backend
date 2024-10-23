@@ -33,8 +33,8 @@ public class UserService implements UserDetailsService  {
 	
 	
 	
-	//CRUD - Create, Read, Update, Delete
-	
+
+	//sukuria vartotoja
 	public UserDto createUser(UserDto userDto) {
 		UserEntity userEntityBeforeSave = entityMapper.toUserEntity(userDto);
 
@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService  {
 		
 		return entityMapper.toUserDto(userEntityAfterSave);		
 	}
-	
+	//randa visus vartotojus
 	public List<UserDto> getAllUsers(){
 		List<UserEntity> users = userRepository.findAll();
 		
@@ -50,40 +50,35 @@ public class UserService implements UserDetailsService  {
 				.map(entityMapper::toUserDto)
 				.toList();		
 	}
-	
+	//randa user su id
 	public Optional<UserDto> getUserById(Long id) {
 		Optional<UserEntity> user = userRepository.findById(id);
 		
 		return user.map(entityMapper::toUserDto);
 	}
-	
+	//editina useri su id
 	public Optional<UserDto> patchUpdateUser(Long id, UserDto userDto) {
 	    Optional<UserEntity> existingUserOpt = userRepository.findById(id);
 	    
 	    if (existingUserOpt.isPresent()) {
 	        UserEntity existingUser = existingUserOpt.get();
 
-	        // Update only fields that are not null in userDto
 	        if (userDto.getUsername() != null) {
 	            existingUser.setUsername(userDto.getUsername());
 	        }
 	        if (userDto.getEmail() != null) {
 	            existingUser.setEmail(userDto.getEmail());
 	        }
-	        // Continue for other fields you want to allow updating...
-	        
-	        // Save the updated entity
 	        UserEntity updatedUser = userRepository.save(existingUser);
 	        return Optional.of(entityMapper.toUserDto(updatedUser));
 	    } else {
-	        return Optional.empty();  // User not found
+	        return Optional.empty();  
 	    }
 	}
-	
+	//istrina vartotoja su id
 	public void deleteUser(Long id) {
 		userRepository.deleteById(id);
 	}
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserEntity user = userRepository

@@ -59,7 +59,7 @@ public class AuthService {
 	  }
 	  
 	
-
+//authenticatina useri rando jo roles i list stringa
 	public JwtResponse authenticateUser(LoginRequest loginRequest) {
        
 		Authentication authentication = authenticationManager.authenticate(
@@ -77,7 +77,7 @@ public class AuthService {
 
         return new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles);
     }
-	
+	//priregistruoja useri
 	public MessageResponse registerUser(SignupRequest signUpRequest) {
 		
         checkUserExists(signUpRequest);
@@ -96,8 +96,8 @@ public class AuthService {
     }
 
 
-
-	private UserEntity createNewUser(SignupRequest signUpRequest) {
+//sukuria nauja vartotoja
+	public UserEntity createNewUser(SignupRequest signUpRequest) {
 		UserEntity user = new UserEntity(
 				signUpRequest.getUsername(), 
 				encoder.encode(signUpRequest.getPassword()),
@@ -107,8 +107,8 @@ public class AuthService {
 	}
 
 
-
-	private Set<Role> getInitialRoles(SignupRequest signUpRequest) {
+//jei kuriant vartotoja roliu nera tai sita funkcija automatiskai prided user role 
+	public Set<Role> getInitialRoles(SignupRequest signUpRequest) {
 		Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
 
@@ -127,7 +127,7 @@ public class AuthService {
 	}
 
 
-
+//kuriant vartotoja patikrina ar username ir email nera jau uzimti
 	private void checkUserExists(SignupRequest signUpRequest) {
 		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Username is already taken!");

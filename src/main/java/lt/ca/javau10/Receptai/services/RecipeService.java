@@ -20,12 +20,12 @@ public class RecipeService {
 	RecipeService(RecipeRepository recipeRep){
 		this.recipeRep=recipeRep;
 	}
-	
+	//šita funkcija gražina visus imanomus receptus is duopmenu bazes
 	public List<Recipe> getAllRecipes() {
 		return recipeRep.findAll();
 	}
 
-	
+	//si funkcija randa recepta su id is duopmenu bazes
 	public Recipe getRecipeById(Long id) {
 		return recipeRep.findById(id).orElse(new Recipe());
 	}
@@ -34,15 +34,16 @@ public class RecipeService {
 	public Recipe getOneByName(String name) {
 		return recipeRep.findOneByName(name);
 	    }
-	
+	//ši funkcija issaugo receptą
     public Recipe saveRecipe(Recipe recipe) {
     	return recipeRep.save(recipe);
     }
+    //ištrina receptą su id
     public void deleteRecipeById(Long id) {
 		recipeRep.deleteById(id);
 		
 	}
-
+//recepto editinimas kuris pakeičia tik tuos laukus kurie buvo atsiusti kiti laukeliai paiimami is seno entitcio
 	public Recipe partialUpdateRecipe(Long id, Recipe recipeUpdates) {
 		Recipe oldRecipe = recipeRep.findById(id)
 	            .orElseThrow();
@@ -71,7 +72,7 @@ public class RecipeService {
 
 	    return recipeRep.save(oldRecipe);
 	}
-	
+	//atnaujina recepto nuotraukos nuoroda
 	public Recipe imageLinkUpdate(Long id, String link) {
 	    Recipe recipeEnt = recipeRep.findById(id)
 	            .orElseThrow();

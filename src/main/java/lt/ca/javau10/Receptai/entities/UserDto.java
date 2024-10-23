@@ -22,7 +22,7 @@ public class UserDto implements UserDetails {
 	private Set<Role> roles;
 	
 	@JsonIgnore
-	private String password; //One way road 
+	private String password;
 	
 	public UserDto() {}
 

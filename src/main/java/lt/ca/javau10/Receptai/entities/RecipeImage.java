@@ -22,11 +22,11 @@ public class RecipeImage {
     @Column(name = "image_data", columnDefinition = "LONGBLOB") // Explicitly defining the column type
     private byte[] imageData;
 
-    // No-Args Constructor
+   
     public RecipeImage() {
     }
 
-    // All-Args Constructor
+
     public RecipeImage(Long id, String name, String type, byte[] imageData) {
         this.id = id;
         this.name = name;
@@ -34,14 +34,14 @@ public class RecipeImage {
         this.imageData = imageData;
     }
 
-    // Another Constructor
+
     public RecipeImage(String name, String type, byte[] imageData) {
         this.name = name;
         this.type = type;
         this.imageData = imageData;
     }
 
-    // Getters and Setters
+
     public Long getId() {
         return id;
     }
@@ -109,7 +109,7 @@ public class RecipeImage {
         }
     }
 
-    // Static method to return a new Builder instance
+
     public static Builder builder() {
         return new Builder();
     }

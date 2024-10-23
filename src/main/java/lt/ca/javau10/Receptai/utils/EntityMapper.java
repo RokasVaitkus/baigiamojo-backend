@@ -8,7 +8,7 @@ import lt.ca.javau10.Receptai.entities.UserEntity;
 
 @Component
 public class EntityMapper {
-	
+	//padaro userdto i userEntity
 	public UserEntity toUserEntity(UserDto dto) {
 		
 		UserEntity entity = new UserEntity();
@@ -19,7 +19,7 @@ public class EntityMapper {
 		return entity;		
 	}
 	
-	
+	//padaro userentity i user dto
 	public UserDto toUserDto(UserEntity entity) {
 		return new UserDto( 
 				entity.getId(), 

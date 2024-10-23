@@ -42,20 +42,20 @@ public class AdminController {
 	//
 	//USER DALIS
 	//
-	
+	//grazina visu vartotoju DTO
 	@GetMapping("/allusers")
 	public ResponseEntity<List<UserDto>> getAllUsers(){
 		List<UserDto> users = userService.getAllUsers();
 		return new ResponseEntity<>(users, HttpStatus.OK);	
 	}
-	
+	//ištrina vartotoja pagal id
 	@DeleteMapping("/deleteuserbyid/{id}")
 	public ResponseEntity<Void> deleteUser(@PathVariable Long id){
 		userService.deleteUser(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
-
+// randa vartotoja pagal id
 	@GetMapping("/finduserbyid/{id}")
 	public ResponseEntity<UserDto> getUserById(@PathVariable Long id){	
 		Optional<UserDto> userInBox = userService.getUserById(id);
@@ -66,21 +66,23 @@ public class AdminController {
 	//
 	//RECEPTU DALIS
 	//
-	
+	//sukuria recepta su gautai duomenimis
     @PostMapping("/createrecipe")
     public Recipe createRecipe(@RequestBody Recipe recipe) {
         return recipeService.saveRecipe(recipe);
     }
-    
+    //ištrina recepta pagal id
     @DeleteMapping("/deleterecipebyid/{id}")
     public void deleteRecipe(@PathVariable Long id) {
     	recipeService.deleteRecipeById(id);
     	
     }
+    //redaguoja recepta pagal id ir gauta body
     @PatchMapping("/editrecipebyid/{id}")
     public Recipe editRecipe(@PathVariable Long id, @RequestBody Recipe recipeUpdates) {
     	return recipeService.partialUpdateRecipe(id, recipeUpdates);
     }
+  //redaguoja recepto nuotraukos linka pagal id ir gauta body
     @PatchMapping("/updaterecipeimagelink/{id}")
     public Recipe editRecipe(@PathVariable Long id, @RequestBody String link) {
     	System.out.println("Received link: " + link);
@@ -90,6 +92,7 @@ public class AdminController {
 //
 //IMAGE ENDPOINTS
 //
+    //įkelti nuotrauka
     @PostMapping("/createimage")
     public ResponseEntity<Long> storeFilesIntoDB(@RequestParam("file") MultipartFile file) throws IOException {
         if (file.isEmpty()) {
@@ -102,12 +105,13 @@ public class AdminController {
         
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-
+    //ištrinti nuotrauka pagal id
 	@DeleteMapping("/deleteimagebyid/{id}")
 		public ResponseEntity<Object> deleteImageById(@PathVariable Long id) {
 		imageService.deleteImageById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	//pakeisti nuotrauka pagal id
     @PatchMapping("/editimagebyid/{id}")
     public RecipeImage editRecipe(@PathVariable Long id, @RequestBody RecipeImage recipeImage) {
     	return imageService.partialUpdateImage(id, recipeImage);

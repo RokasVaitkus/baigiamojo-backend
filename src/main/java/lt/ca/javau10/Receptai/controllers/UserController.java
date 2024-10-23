@@ -39,7 +39,7 @@ public class UserController {
 //
 // USER ENDPOINTS
 //
-
+// redaguoti vartotoja pagal id
 	@PatchMapping("/edituserbyid/{id}")
 	public ResponseEntity<UserDto> patchUpdateUser(
 	                                  @PathVariable Long id, 
@@ -55,10 +55,12 @@ public class UserController {
 //
 // RECIPE ENDPOINTS
 //
+	//šis endpointas gražina visus receptus json formatu
 	@GetMapping("/allrecipes")
 	public List<Recipe> getAllRecipes() {
 		return recipeService.getAllRecipes();
 	}
+	//sis endpointas grazina viena recepta pagal id
 	@GetMapping("/findrecipebyid/{id}")
 	public Recipe getRecipeByID(@PathVariable Long id) {
 		return recipeService.getRecipeById(id);
@@ -66,7 +68,7 @@ public class UserController {
 	
 //
 //IMAGE ENDPOINTS
-//
+//sis endpointas grazina nuotrauka pagal id
 	@GetMapping("/findimagebyid/{id}")
 	public ResponseEntity<String> getImage(@PathVariable Long id) {
 	    byte[] imageData = imageService.getImageById(id);
