@@ -11,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
 @Table(name="recipes")
@@ -25,6 +26,7 @@ public class Recipe {
 	private int portions;
 	private int howLongItTakesToMake;
 	private String howToMakeIt;
+	private String linkToImage;
 	
 	
 	@ElementCollection
@@ -43,6 +45,7 @@ public class Recipe {
 		this.howLongItTakesToMake = howLongItTakesToMake;
 		this.ingredients = ingredients;
 		this.howToMakeIt = howToMakeIt;
+		this.linkToImage="";
 	}
 	public Recipe( String name, String description, int portions, int howLongItTakesToMake,
 			List<Ingredients> ingredients, String howToMakeIt) {
@@ -53,6 +56,15 @@ public class Recipe {
 		this.howLongItTakesToMake = howLongItTakesToMake;
 		this.ingredients = ingredients;
 		this.howToMakeIt = howToMakeIt;
+		this.linkToImage="";
+	}
+
+	public String getLinkToImage() {
+		return linkToImage;
+	}
+
+	public void setLinkToImage(String linkToImage) {
+		this.linkToImage = linkToImage;
 	}
 
 	public long getId() {

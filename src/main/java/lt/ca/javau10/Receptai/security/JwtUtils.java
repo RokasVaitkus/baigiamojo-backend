@@ -39,11 +39,11 @@ public class JwtUtils {
   
   
   public void setSecretKey(String key) {
-	  jwtSecret = key;
+      jwtSecret = key;
   }
   
   public void setExpirationMs(int ms) {
-	  jwtExpirationMs = ms;
+      jwtExpirationMs = ms;
   }
   
 
@@ -60,7 +60,7 @@ public class JwtUtils {
   }
   
   public Key toKey(String secret) {
-	  return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+      return Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
   }
   
   private Key key() {
@@ -68,11 +68,11 @@ public class JwtUtils {
   }
 
   public String getUserNameFromJwtToken(String token) {
-	  
-	  return Jwts
-			  .parser()
-			  .verifyWith((SecretKey) key())
-			  .build()
+      
+      return Jwts
+              .parser()
+              .verifyWith((SecretKey) key())
+              .build()
               .parseSignedClaims(token)
               .getPayload()
               .getSubject();
@@ -80,7 +80,7 @@ public class JwtUtils {
 
   public boolean validateJwtToken(String authToken) {
     try {
-    	logger.debug("trying to validate jwt token");
+        logger.debug("trying to validate jwt token");
       Jwts.parser().verifyWith((SecretKey)key()).build().parse(authToken);
         logger.debug("jwt token is valid \n" + authToken);
       return true;
@@ -98,11 +98,11 @@ public class JwtUtils {
   }
   
   public Authentication getAuthentication(String token) {
-	    String username = getUserNameFromJwtToken(token);
-	    UserDetails userDetails = userService.loadUserByUsername(username);
-	    logger.debug("UserDetails loaded: " + userDetails.getUsername() + ", Roles: " + userDetails.getAuthorities());
+        String username = getUserNameFromJwtToken(token);
+        UserDetails userDetails = userService.loadUserByUsername(username);
+        logger.debug("UserDetails loaded: " + userDetails.getUsername() + ", Roles: " + userDetails.getAuthorities());
 
-	    return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
   }
   
 }

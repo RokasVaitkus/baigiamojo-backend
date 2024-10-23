@@ -65,7 +65,24 @@ public class RecipeService {
 	    if (recipeUpdates.getHowToMakeIt() != null) {
 	        oldRecipe.setHowToMakeIt(recipeUpdates.getHowToMakeIt());
 	    }
+	    if (recipeUpdates.getLinkToImage() != null) {
+	    	oldRecipe.setLinkToImage(recipeUpdates.getLinkToImage());
+	    }
 
 	    return recipeRep.save(oldRecipe);
 	}
+	
+	public Recipe imageLinkUpdate(Long id, String link) {
+	    Recipe recipeEnt = recipeRep.findById(id)
+	            .orElseThrow();
+
+	    if (link != null) {
+	        // Trim whitespace and remove any extraneous characters
+	        String cleanedLink = link.trim().replaceAll("\"", "");
+	        recipeEnt.setLinkToImage(cleanedLink);
+	    }
+
+	    return recipeRep.save(recipeEnt);
+	}
+
 }
